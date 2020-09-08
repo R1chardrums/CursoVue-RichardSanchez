@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+
+	<div class="estilos"><!--Cerrar todo en div al querer usarse vue.js-->
+		<h1>{{titulo}}</h1> <!-- llamado al dato realizado con Vue en prueba_vue.js -->		
+
+		<ul>
+			<li v-for="msj of cadena"> <!-- creación de un ciclo para un arreglo-->
+				{{msj}} <!--representa cada mensaje que se mostrará del arreglo-->
+			</li>
+		</ul>
+
+		<input type="text" v-model="otroInstrumento" @keyup.enter="agregarInstrumento"> <!--v-model tomará el valor agregado en el campo y se alojará en "otroInstrumento" (NOTA: Puede determinarse su tipo de dato, ejemplo: v-model.number-->
+
+
+		<button v-on:click="agregarInstrumento">Agregar Instrumento</button> <!-- para generar el evento onClick, es opcional usar @click para lo mismo -->
+
+
+
+		<ul>
+			<li v-for="instrumento of cadena2">
+				{{instrumento.nombre}} = {{instrumento.cantidad}} <!--Se llama al nombre y a la cantidad para que solamente se visualicen dichos elementos-->
+
+				<button @click="instrumento.cantidad++">+</button><!--por cada click al botón, se incrementa el número de cantidad de los instrumentos-->
+
+				<span v-if="instrumento.cantidad === 0"> <!-- creación de una condicional-->
+					(No hay)
+				</span><!--Mensaje que se muestra si uno de los instrumentos está en cero-->
+			</li>
+		</ul>
+
+		<h2>{{sumaTotal}}</h1>
+	</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script src="prueba_vue.js"></script>
+<script src="tips_nuevos.js"></script>
+</body>
+</html>

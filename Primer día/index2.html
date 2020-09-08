@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	<title>Document</title>
+</head>
+<body>
+	<div class="entorno container mt-5">
+
+		<div :class="['text-white','p-3', colorFondo]"> <!-- para llamar a clases bootstrap, más un elemento creado en el objeto Vue para el color de fondo -->
+			Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, quo beatae ipsa qui fugit animi optio voluptatum impedit in maxime hic facilis ex nobis dolorem aliquam. Dolore quibusdam aliquid recusandae.
+		</div>
+
+		<input type="text" v-model="colorFondo"><!-- Dependiendo del valor (si se agrega otro color de fondo bootstrap), se va a cambiar el fondo del párrafo anterior-->
+		<div :class="{'bg-info' : color , 'bg-success' : !color}"><!-- Clase en donde se crea un objeto, el cual tiene la siguiente lógica: 
+			Se pondrá en bg-info cuando el elemento de color sea verdadero y se pondrá en bg-success cuando el elemento color sea falso-->
+			Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate doloremque totam ea eius temporibus delectus eveniet itaque, eos, at quidem quaerat iste voluptatem amet dolores sint, cumque magni optio nulla.
+		</div>
+		<button @click="color = !color">cambiar color</button><!--botón que, al dar click, cambiará lo opuesto al color que tiene al momento-->
+	</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script src="prueba_vue2.js"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</body>
+</html>
