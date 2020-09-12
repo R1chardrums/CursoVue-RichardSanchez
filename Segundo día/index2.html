@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+<title>Práctica2</title>
+</head>
+<body>
+
+<div class="container my-5" id="entorno"><!-- margin top-bottom de 5 -->
+  <h1>{{oracion}}</h1>
+  <h2>{{invertido}}</h2>
+
+  <input type="text" class="form-control my-5" v-model="oracion">
+
+  <button class="btn btn-primary" @click="contador++">+</button>
+  <button class="btn btn-danger" @click="contador--">-</button>
+
+  <h3>{{contador}}</h3>
+
+  <div class="progress">
+    <div class="progress-bar" role="progressbar" :style="{width: contador+'%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" :class="color" >{{contador}}%</div>
+  </div>
+
+</div><!-- Container -->
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script src="jsPues2.js"></script>
+  </body>
+</html>
