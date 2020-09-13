@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script src="https://unpkg.com/vuex@3.5.1/dist/vuex.js"></script>
+
+<title>Práctica5</title>
+</head>
+<body>
+
+<div class="container my-5" id="entorno"><!-- margin top-bottom de 5 -->
+	<titulo></titulo>
+</div><!-- Container -->
+
+<script>
+Vue.component('titulo',{//componente padre
+	template:
+	`
+	<div>
+		<h1>Número {{numero}}</h1>
+		<hijo></hijo>
+	</div>
+	`,
+
+	computed:{
+		...Vuex.mapState(['numero'])//mapea el estado de numero del store
+	}
+});
+
+Vue.component('hijo',{//componente hijo
+	template:
+	`
+	<div>
+		<button @click="aumentar">+</button>
+		<button @click="disminuir(2)">-</button>
+		<button @click="obtenerCursos">Obtener cursos</button>
+
+		<h1>El número {{numero}}</h1>
+
+		<ul v-for="item of cursos">
+			<li>{{item.nombre}}</li>
+		</ul>
+	</div>
+	`,
+//NOTA: Para que funcione obtenerCursos, se debe usar un liveServer
+	computed:{
+		...Vuex.mapState(['numero','cursos'])//mapear los estados del store
+	},
+
+	methods:{
+		...Vuex.mapMutations(['aumentar','disminuir']),//mapear mutaciones o funciones del store
+		...Vuex.mapActions(['obtenerCursos'])//mapear acciones del store
+	}
+});
+
+const store = new Vuex.Store({//Tienda creada con Vuex para compartir información con los componentes creados
+	state:{
+		numero: 10,//datos, elementos o estados a utilizar del store
+		cursos: []
+	},
+
+	mutations:{//mutaciones o funciones creadas
+		aumentar(state){
+			state.numero++
+		},
+
+		disminuir(state,deCuantoEnCuanto){
+			state.numero-=deCuantoEnCuanto
+		},
+
+		llenarCursos(state,accion){
+			state.cursos = accion
+		}
+	},
+
+	actions:{//acciones creadas 
+		obtenerCursos: async function({commit}){//función asíncrona para llamar un documento JSON bajo el commit
+			const data = await fetch('cursos.json');//busca el documento
+			const loscursos = await data.json();//determina el documento como tipo JSON
+			commit('llenarCursos', loscursos)//se usa la mutación de llenar cursos en el arreglo, usando la data en tipo JSON
+		}
+	}
+});
+
+new Vue({
+	el: '#entorno',
+	store
+});
+</script>
+</body>
+</html>
